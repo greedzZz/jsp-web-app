@@ -10,6 +10,6 @@ public class ClearDataServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getServletContext().removeAttribute("results");
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
     }
 }

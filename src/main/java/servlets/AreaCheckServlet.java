@@ -32,7 +32,7 @@ public class AreaCheckServlet extends HttpServlet {
             results.add(result);
             getServletContext().setAttribute("results", results);
         }
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
     }
 
     private boolean validateX(String x) {

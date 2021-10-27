@@ -90,8 +90,8 @@ $(function () {
             url: "controller",
             type: "POST",
             data: {clear: "true"},
-            success: function () {
-                window.location.href = '/web2-1.0-SNAPSHOT/index.jsp';
+            success: function (data) {
+                $("table").html(data);
             }
         });
     }
@@ -103,8 +103,8 @@ $(function () {
                 url: "controller",
                 type: "POST",
                 data: {x: getX(), y: getY(), r: getR()},
-                success: function () {
-                    window.location.href = '/web2-1.0-SNAPSHOT/index.jsp';
+                success: function (data) {
+                    $("table").html(data);
                 }
             });
         }
