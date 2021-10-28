@@ -35,6 +35,11 @@ public class AreaCheckServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
+    }
+
     private boolean validateX(String x) {
         try {
             double xNum = Double.parseDouble(x);

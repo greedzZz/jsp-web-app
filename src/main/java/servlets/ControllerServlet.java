@@ -17,4 +17,9 @@ public class ControllerServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         }
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
+    }
 }

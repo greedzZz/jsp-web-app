@@ -27,4 +27,20 @@
         <servlet-name>ClearDataServlet</servlet-name>
         <url-pattern>/clear</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ErrorPageServlet</servlet-name>
+        <servlet-class>servlets.ErrorPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ErrorPageServlet</servlet-name>
+        <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type >
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error</location>
+    </error-page>
 </web-app>
