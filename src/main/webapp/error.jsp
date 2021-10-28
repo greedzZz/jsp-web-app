@@ -10,6 +10,7 @@
         body {
             background-color: black;
         }
+
         img {
             margin: 7% 0 0 34%;
         }

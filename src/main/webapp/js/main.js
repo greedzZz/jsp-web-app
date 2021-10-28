@@ -92,6 +92,7 @@ $(function () {
             data: {clear: "true"},
             success: function (data) {
                 $("table").html(data);
+                drawPoints();
             }
         });
     }
@@ -99,15 +100,44 @@ $(function () {
     $("form").submit(function (event) {
         event.preventDefault();
         if (validateData()) {
-            $.ajax({
-                url: "controller",
-                type: "POST",
-                data: {x: getX(), y: getY(), r: getR()},
-                success: function (data) {
-                    $("table").html(data);
-                }
-            });
+            requestWithArgs(getX(), getY());
         }
     })
 
+    function drawPoints() {
+        document.querySelectorAll("circle").forEach(e => e.remove());
+        let x, y, r;
+        let svg = document.querySelector("svg");
+        document.querySelectorAll("table tbody tr").forEach(function (row, index) {
+            x = parseFloat(row.cells[0].innerText);
+            y = parseFloat(row.cells[1].innerText);
+            r = parseFloat(row.cells[2].innerText);
+            let absoluteX = 193 + x * 140 / r;
+            let absoluteY = 193 - y * 140 / r;
+            svg.insertAdjacentHTML('beforeend', `<circle r="4" cx=${absoluteX} cy=${absoluteY} fill="cyan"
+                fill-opacity="0.85"></circle>`);
+        })
+    }
+
+    function requestWithArgs(xArg, yArg) {
+        $.ajax({
+            url: "controller",
+            type: "POST",
+            data: {x: xArg, y: yArg, r: getR()},
+            success: function (data) {
+                $("table").html(data);
+                drawPoints();
+            }
+        });
+    }
+
+    $("svg").click(function (e) {
+        if ($("#r-buttons").hasClass("ready")) {
+            let x = (e.offsetX - 193) * getR() / 140;
+            let y = (193 - e.offsetY) * getR() / 140;
+            requestWithArgs(x.toFixed(1), y.toFixed(1));
+        } else {
+            alert("Choose R value.");
+        }
+    })
 });

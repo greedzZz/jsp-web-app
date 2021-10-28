@@ -37,6 +37,7 @@
             <th>Hit fact</th>
         </tr>
         </thead>
+        <tbody>
         <%
             for (Result result : results) {
         %>
@@ -57,6 +58,7 @@
         <%
             }
         %>
+        </tbody>
     </table>
 </div>
 <div class="plane">
@@ -91,6 +93,16 @@
         <rect class="shape" x="53" y="53" width="140" height="140"></rect>
         <polygon class="shape" points="193 193 333 193 193 333"></polygon>
         <path class="shape" d="M 193 123 A 70 70 0 0 1 263 193 L 193 193 Z"></path>
+
+        <%
+            for (Result result : results) {
+        %>
+        <circle r="4" cx="<%=193 + Math.round(140 * result.getX() / result.getR())%>"
+                cy="<%=193 - Math.round(140 * result.getY() / result.getR())%>" fill="cyan"
+                fill-opacity="0.85"></circle>
+        <%
+            }
+        %>
     </svg>
 </div>
 <div class="form">
@@ -99,7 +111,7 @@
         <br>
         <div>
             <label>X value:</label>
-            <label><input type="text" size="38" maxlength="7" name="x-value"
+            <label><input type="text" size="38" maxlength="4" name="x-value"
                           placeholder="X ∈ ( -5 ; 3 )"></label>
         </div>
         <br>

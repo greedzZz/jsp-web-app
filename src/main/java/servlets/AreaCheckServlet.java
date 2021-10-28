@@ -23,7 +23,7 @@ public class AreaCheckServlet extends HttpServlet {
             double y = Double.parseDouble(req.getParameter("y"));
             double r = Double.parseDouble(req.getParameter("r"));
             boolean hitFact = checkHit(x, y, r);
-            String executionTime = String.format("%.6f" ,(System.nanoTime() - start) * 10e-9).replace(",", ".");
+            String executionTime = String.format("%.6f", (System.nanoTime() - start) * 10e-9).replace(",", ".");
             Result result = new Result(x, y, r, currentTime, executionTime, hitFact);
             ArrayList<Result> results;
             if (getServletContext().getAttribute("results") != null) {

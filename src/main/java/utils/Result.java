@@ -7,6 +7,7 @@ public class Result {
     private final String currentTime;
     private final String executionTime;
     private final boolean hitFact;
+
     public Result(double x, double y, double r, String currentTime, String executionTime, boolean hitFact) {
         this.x = x;
         this.y = y;
