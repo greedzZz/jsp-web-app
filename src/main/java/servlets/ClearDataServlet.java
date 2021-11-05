@@ -9,8 +9,10 @@ import java.io.IOException;
 public class ClearDataServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().removeAttribute("results");
-        getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
+        if (req.getParameter("clear") != null) {
+            getServletContext().removeAttribute("results");
+            getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
+        } else getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
     }
 
     @Override

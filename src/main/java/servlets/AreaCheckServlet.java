@@ -18,21 +18,23 @@ public class AreaCheckServlet extends HttpServlet {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         String currentTime = formatter.format(date);
-        if (validateData(req.getParameter("x"), req.getParameter("y"), req.getParameter("r"))) {
-            double x = Double.parseDouble(req.getParameter("x"));
-            double y = Double.parseDouble(req.getParameter("y"));
-            double r = Double.parseDouble(req.getParameter("r"));
-            boolean hitFact = checkHit(x, y, r);
-            String executionTime = String.format("%.6f", (System.nanoTime() - start) * 10e-9).replace(",", ".");
-            Result result = new Result(x, y, r, currentTime, executionTime, hitFact);
-            ArrayList<Result> results;
-            if (getServletContext().getAttribute("results") != null) {
-                results = (ArrayList<Result>) getServletContext().getAttribute("results");
-            } else results = new ArrayList<>();
-            results.add(result);
-            getServletContext().setAttribute("results", results);
-        }
-        getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
+        if (req.getParameter("x") != null && req.getParameter("y") != null && req.getParameter("r") != null) {
+            if (validateData(req.getParameter("x"), req.getParameter("y"), req.getParameter("r"))) {
+                double x = Double.parseDouble(req.getParameter("x"));
+                double y = Double.parseDouble(req.getParameter("y"));
+                double r = Double.parseDouble(req.getParameter("r"));
+                boolean hitFact = checkHit(x, y, r);
+                String executionTime = String.format("%.6f", (System.nanoTime() - start) * 10e-9).replace(",", ".");
+                Result result = new Result(x, y, r, currentTime, executionTime, hitFact);
+                ArrayList<Result> results;
+                if (getServletContext().getAttribute("results") != null) {
+                    results = (ArrayList<Result>) getServletContext().getAttribute("results");
+                } else results = new ArrayList<>();
+                results.add(result);
+                getServletContext().setAttribute("results", results);
+            }
+            getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
+        } else getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
     }
 
     @Override
