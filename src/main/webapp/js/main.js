@@ -105,16 +105,14 @@ $(function () {
     })
 
     function drawPoints() {
-        document.querySelectorAll("circle").forEach(e => e.remove());
-        let x, y, r;
-        let svg = document.querySelector("svg");
-        document.querySelectorAll("table tbody tr").forEach(function (row, index) {
-            x = parseFloat(row.cells[0].innerText);
-            y = parseFloat(row.cells[1].innerText);
-            r = parseFloat(row.cells[2].innerText);
-            let absoluteX = 193 + x * 140 / r;
-            let absoluteY = 193 - y * 140 / r;
-            svg.insertAdjacentHTML('beforeend', `<circle r="4" cx=${absoluteX} cy=${absoluteY} fill="cyan"
+        $("circle").remove();
+        $("table tbody tr").each(function (row) {
+            let x = parseFloat(row.cells[0].innerText);
+            let y = parseFloat(row.cells[1].innerText);
+            let r = parseFloat(row.cells[2].innerText);
+            let cX = 193 + x * 140 / r;
+            let cY = 193 - y * 140 / r;
+            $("svg").append(`<circle r="4" cx=${cX} cy=${cY} fill="cyan"
                 fill-opacity="0.85"></circle>`);
         })
     }
